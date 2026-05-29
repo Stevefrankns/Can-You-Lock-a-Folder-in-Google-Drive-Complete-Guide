@@ -1,0 +1,1759 @@
+<!-- Replace YOUR-DOMAIN.com before launch -->
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Can You Lock a Folder in Google Drive — Complete Guide</title>
+<meta content="Discover how to secure your Google Drive folders. Learn the difference between sharing restrictions and true client-side encryption for your sensitive cloud data." name="description"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+        :root {
+            --color-bg: #FFFFFF;
+            --color-primary-accent: #E63329;
+            --color-secondary-accent: #000000;
+            --color-grid-line: #EEEEEE;
+            --color-content-bg: #F9F9F9;
+            --color-body-text: #111111;
+            --color-heading-text: #000000;
+            --color-border: #EEEEEE;
+            --color-meta-text: #666666;
+            --color-red-wash: rgba(230, 51, 41, 0.08);
+            --font-heading: 'Barlow Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-body: 'Work Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --max-reading-width: 780px;
+            --max-wide-width: 1180px;
+            --section-padding-v: 96px;
+            --grid-unit: 24px;
+            --transition-speed: 0.28s;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-body-text);
+            line-height: 1.75;
+            font-size: 17px;
+            overflow-x: hidden;
+            text-rendering: geometricPrecision;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(to right, rgba(238,238,238,0.55) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(238,238,238,0.45) 1px, transparent 1px);
+            background-size: 120px 100%, 100% 24px;
+            opacity: 0.35;
+            z-index: -1;
+        }
+
+        h1, h2, h3, h4, h5, h6, .nav-logo, .brand-title {
+            font-family: var(--font-heading);
+            color: var(--color-heading-text);
+            font-weight: 700;
+            line-height: 0.96;
+            text-transform: uppercase;
+        }
+        h1 {
+            font-size: clamp(48px, 7vw, 80px);
+            line-height: 0.9;
+            letter-spacing: -1.4px;
+            margin-bottom: 1.35rem;
+            max-width: 900px;
+        }
+        h2 {
+            font-size: clamp(32px, 4vw, 36px);
+            line-height: 1;
+            letter-spacing: 4px;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+        h3 {
+            font-size: 1.75rem;
+            line-height: 1;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        h4 {
+            font-size: 1.25rem;
+            line-height: 1.05;
+            margin-bottom: 0.65rem;
+            letter-spacing: 1px;
+        }
+        p { margin-bottom: 1.5rem; }
+        a { color: var(--color-secondary-accent); text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color var(--transition-speed), background var(--transition-speed), opacity var(--transition-speed); }
+        a:hover { color: var(--color-primary-accent); opacity: 1; }
+        ul, ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        li { margin-bottom: 0.65rem; }
+        code { background: var(--color-content-bg); border: 1px solid var(--color-border); padding: 0.05rem 0.35rem; font-family: var(--font-body); }
+        img { max-width: 100%; height: auto; border-radius: 0; display: block; object-fit: contain; }
+
+        .container-read { max-width: var(--max-reading-width); margin: 0 auto; padding: 0 24px; }
+        .container-wide { max-width: var(--max-wide-width); margin: 0 auto; padding: 0 24px; }
+        section { position: relative; padding: var(--section-padding-v) 0; background: var(--color-bg); }
+        .bg-alt { background-color: var(--color-content-bg); }
+        .pt-0 { padding-top: 0; }
+
+        .reveal {
+            clip-path: inset(100% 0 0 0);
+            transform: translateY(18px);
+            transition: clip-path 0.75s cubic-bezier(.2,.8,.2,1), transform 0.75s cubic-bezier(.2,.8,.2,1);
+        }
+        .reveal.in-view {
+            clip-path: inset(0 0 0 0);
+            transform: translateY(0);
+        }
+
+        .meta-bar {
+            font-size: 0.82rem;
+            color: var(--color-meta-text);
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1rem;
+            flex-wrap: wrap;
+            background: transparent !important;
+            border-radius: 0 !important;
+        }
+        .label-pill {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 0;
+            background: var(--color-secondary-accent);
+            color: #fff;
+            font-size: 0.76rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .signature-quote {
+            position: relative;
+            padding: 32px 32px 32px 72px;
+            margin: 2.5rem 0;
+            background: var(--color-content-bg);
+            border-radius: 0;
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-primary-accent);
+            font-size: 1.1rem;
+            font-style: normal;
+            color: var(--color-heading-text);
+        }
+        .signature-quote svg {
+            position: absolute;
+            left: 24px;
+            top: 32px;
+            width: 28px;
+            height: 28px;
+            fill: var(--color-primary-accent);
+            opacity: 1;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            height: 72px;
+            display: flex;
+            align-items: center;
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: var(--max-wide-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .nav-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--color-secondary-accent);
+            text-decoration: none;
+        }
+        .brand-mark {
+            width: 36px;
+            height: 36px;
+            display: inline-grid;
+            place-items: center;
+            flex: 0 0 36px;
+        }
+        .brand-mark svg { width: 36px; height: 36px; display: block; }
+        .brand-title {
+            font-size: 1.55rem;
+            color: var(--color-secondary-accent);
+            letter-spacing: 1.2px;
+            word-spacing: 0.18em;
+            white-space: nowrap;
+        }
+        .nav-links {
+            position: relative;
+            display: flex;
+            gap: 1.7rem;
+            align-items: center;
+            --nav-left: 0px;
+            --nav-width: 0px;
+        }
+        .nav-links::after {
+            content: "";
+            position: absolute;
+            left: var(--nav-left);
+            bottom: -22px;
+            height: 3px;
+            width: var(--nav-width);
+            background: var(--color-primary-accent);
+            transition: left .28s ease, width .28s ease;
+        }
+        .nav-links a {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--color-secondary-accent);
+            text-decoration: none;
+            letter-spacing: .02em;
+        }
+        .nav-links a.active,
+        .nav-links a:hover { color: var(--color-primary-accent); }
+        .nav-links a.btn,
+        .nav-links a.btn:visited {
+            color: #fff !important;
+            background: var(--color-secondary-accent);
+            border-color: var(--color-secondary-accent);
+            opacity: 1;
+        }
+        .nav-links a.btn:hover,
+        .nav-links a.btn.active {
+            color: #fff !important;
+            background: var(--color-primary-accent);
+            border-color: var(--color-primary-accent);
+        }
+        .hamburger {
+            display: none;
+            background: none;
+            border: 1px solid var(--color-secondary-accent);
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--color-secondary-accent);
+            width: 42px;
+            height: 42px;
+            border-radius: 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 24px;
+            border-radius: 0;
+            font-family: var(--font-body);
+            font-size: 0.86rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            text-align: center;
+            border: 2px solid var(--color-secondary-accent);
+            text-decoration: none;
+            background: var(--color-secondary-accent);
+            color: #fff;
+        }
+        .btn:hover,
+        .btn-outline:hover,
+        .btn-filled:hover,
+        .btn-white:hover {
+            background: var(--color-primary-accent);
+            color: #fff;
+            border-color: var(--color-primary-accent);
+            opacity: 1;
+        }
+        .btn-outline,
+        .btn-filled,
+        .btn-white {
+            background: var(--color-secondary-accent);
+            color: #fff;
+            border-color: var(--color-secondary-accent);
+        }
+        .nav-cta {
+            padding: 9px 16px;
+            font-size: 0.82rem;
+            white-space: nowrap;
+        }
+
+        .hero {
+            background-color: var(--color-bg);
+            background-image: linear-gradient(to bottom, rgba(238,238,238,0.95) 1px, transparent 1px);
+            background-size: 100% 24px;
+            padding: 86px 0 70px;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .hero .container-read {
+            max-width: 940px;
+            border-left: 4px solid var(--color-primary-accent);
+            padding-left: 36px;
+        }
+        .hero .container-read > p:first-of-type::after {
+            content: "";
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: var(--color-primary-accent);
+            margin-top: 1.45rem;
+        }
+        .breadcrumb {
+            font-size: 0.78rem;
+            color: var(--color-meta-text);
+            margin-bottom: 2rem;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-weight: 600;
+        }
+        .quick-answer {
+            background: #fff;
+            border-left: 4px solid var(--color-primary-accent);
+            padding: 28px;
+            margin-top: 2rem;
+            border-radius: 0;
+            border-top: 1px solid var(--color-border);
+            border-right: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: none;
+        }
+        .quick-answer h3 {
+            font-family: var(--font-body);
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 1.18rem;
+            margin-top: 0;
+            line-height: 1.35;
+            color: var(--color-secondary-accent);
+        }
+        .quick-answer p:last-child { margin-bottom: 0; }
+
+        .toc-card,
+        .interactive-tool,
+        .use-case-card,
+        .price-col,
+        .saas-mockup,
+        .image-block {
+            background: #fff;
+            border: 1px solid var(--color-border);
+            border-radius: 0;
+            box-shadow: none;
+            transition: border-color .25s ease, border-left-color .25s ease, transform .25s ease;
+        }
+        .toc-card,
+        .interactive-tool {
+            padding: 28px;
+            margin: 3rem 0;
+        }
+        .toc-card:hover,
+        .interactive-tool:hover,
+        .use-case-card:hover,
+        .price-col:hover,
+        .image-block:hover {
+            border-left: 4px solid var(--color-primary-accent);
+        }
+        .toc-card h3,
+        .tool-header h3 {
+            margin-top: 0;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.3;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .toc-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.15rem 2rem;
+        }
+        @media(min-width: 768px) { .toc-list { grid-template-columns: 1fr 1fr; } }
+        .toc-list a {
+            display: block;
+            font-size: 0.92rem;
+            padding: 6px 0;
+            color: var(--color-secondary-accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(238,238,238,0.8);
+        }
+        .toc-list a:hover {
+            color: var(--color-primary-accent);
+            padding-left: 6px;
+        }
+
+        .method-title {
+            position: relative;
+            display: grid;
+            grid-template-columns: 92px 1fr;
+            align-items: start;
+            column-gap: 24px;
+            margin-top: 3.2rem;
+        }
+        .method-title::before {
+            content: attr(data-method);
+            font-family: var(--font-heading);
+            color: var(--color-primary-accent);
+            font-size: 82px;
+            line-height: 0.78;
+            letter-spacing: -1px;
+            grid-row: 1;
+        }
+        .difficulty-meter {
+            height: 8px;
+            border: 1px solid var(--color-secondary-accent);
+            background: #fff;
+            margin: -0.7rem 0 1.9rem;
+            overflow: hidden;
+            position: relative;
+        }
+        .difficulty-meter span {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: var(--color-primary-accent);
+            transition: width 1.05s cubic-bezier(.2,.8,.2,1);
+        }
+        .difficulty-meter.in-view span { width: var(--fill); }
+
+        .feature-row {
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 1.4rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+            padding: 22px;
+            border: 1px solid var(--color-border);
+            background: #fff;
+            transition: border-left-color .25s, border-left-width .25s;
+        }
+        .feature-row:hover { border-left: 4px solid var(--color-primary-accent); }
+        .feature-icon {
+            flex-shrink: 0;
+            width: 54px;
+            height: 54px;
+            background: var(--color-secondary-accent);
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .feature-icon svg { width: 25px; height: 25px; fill: #fff; }
+        .feature-content h4 {
+            margin: 0 0 0.5rem 0;
+        }
+        .feature-content p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 2rem 0;
+            background: #fff;
+            border-radius: 0;
+            border: 1px solid var(--color-border);
+        }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 680px;
+        }
+        .compare-table th,
+        .compare-table td {
+            padding: 18px 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+            border-right: 1px solid var(--color-border);
+            transition: background .2s ease;
+        }
+        .compare-table th {
+            font-family: var(--font-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.82rem;
+            background: var(--color-secondary-accent);
+            color: #fff;
+        }
+        .compare-table th:nth-child(4) {
+            background: var(--color-primary-accent);
+            color: #fff;
+        }
+        .compare-table tbody tr:nth-child(even) { background: var(--color-content-bg); }
+        .compare-table th:first-child,
+        .compare-table td:first-child {
+            text-align: left;
+            font-weight: 700;
+            background: inherit;
+        }
+        .compare-table .col-highlight { background: var(--color-red-wash) !important; }
+        .dot {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 0;
+            transform: rotate(45deg);
+        }
+        .dot.filled { background: var(--color-primary-accent); }
+        .dot.empty {
+            border: 2px solid var(--color-secondary-accent);
+            background: transparent;
+        }
+        .compare-row-highlight {
+            background: #fff !important;
+            border-left: 4px solid var(--color-primary-accent);
+        }
+
+        .inline-testimonial {
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            padding: 2.5rem 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .inline-testimonial p {
+            font-size: 1.25rem;
+            font-style: normal;
+            color: var(--color-secondary-accent);
+            margin-bottom: 1rem;
+        }
+        .inline-testimonial .author {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--color-meta-text);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        @media(min-width: 768px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+        .price-col {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .price-col h3 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1rem;
+        }
+        .price-list { list-style: none; padding: 0; flex-grow: 1; }
+        .price-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 0.92rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .price-list li::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background: var(--color-primary-accent);
+            margin-top: 9px;
+            flex: 0 0 10px;
+        }
+        .price-col-highlight {
+            border-color: var(--color-primary-accent);
+            position: relative;
+        }
+        .price-col-highlight::before {
+            content: "RECOMMENDED";
+            position: absolute;
+            top: -14px;
+            left: 24px;
+            transform: none;
+            background: var(--color-primary-accent);
+            color: #fff;
+            font-family: var(--font-body);
+            padding: 3px 12px;
+            border-radius: 0;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 0;
+        }
+        .accordion-header {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 20px 0;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-secondary-accent);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-transform: none;
+            letter-spacing: 0;
+            line-height: 1.4;
+        }
+        .accordion-header::after {
+            content: "+";
+            font-size: 1.35rem;
+            color: var(--color-primary-accent);
+            margin-left: 1rem;
+        }
+        .accordion-header[aria-expanded="true"]::after { content: "−"; }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-speed) ease-out;
+        }
+        .accordion-inner {
+            padding: 0 0 20px 24px;
+            font-size: 0.95rem;
+            border-left: 1px solid var(--color-border);
+        }
+
+        .saas-band {
+            background: var(--color-secondary-accent);
+            color: #fff;
+            padding: 96px 0;
+            margin: 0;
+            overflow: hidden;
+        }
+        .saas-band h2,
+        .saas-band h3,
+        .saas-band .label-pill { color: #fff; }
+        .saas-band .label-pill {
+            background: var(--color-primary-accent);
+        }
+        .saas-band p { color: #f2f2f2; }
+        .saas-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media(min-width: 900px) { .saas-grid { grid-template-columns: 0.9fr 1.1fr; } }
+        .saas-mockup {
+            background: #fff;
+            border-radius: 0;
+            padding: 14px;
+            box-shadow: none;
+            border: 1px solid #333;
+        }
+        .saas-mockup-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 10px;
+        }
+        .mockup-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 0;
+            background: var(--color-primary-accent);
+        }
+        .mockup-content {
+            background: var(--color-content-bg);
+            min-height: 310px;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-meta-text);
+            font-size: 0.8rem;
+            overflow: hidden;
+        }
+        .mockup-content img {
+            width: 100%;
+            max-height: 360px;
+            object-fit: contain;
+        }
+        .saas-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 2rem 0;
+        }
+        .chip {
+            background: transparent;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 0;
+            font-size: 0.8rem;
+            border: 1px solid #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .saas-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tool-header {
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .perm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .perm-card {
+            border: 1px solid var(--color-border);
+            padding: 1rem;
+            text-align: left;
+            border-radius: 0;
+            transition: all 0.2s;
+            cursor: crosshair;
+            background: #fff;
+        }
+        .perm-card:hover {
+            border-left: 4px solid var(--color-primary-accent);
+            background: var(--color-content-bg);
+        }
+        .perm-card h4 { margin: 0 0 0.5rem 0; }
+        .perm-detail { font-size: 0.82rem; color: var(--color-meta-text); min-height: 60px; }
+
+        .quiz-question { margin-bottom: 1.5rem; }
+        .quiz-options label {
+            display: block;
+            padding: 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 0;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fff;
+        }
+        .quiz-options label:hover { border-left: 4px solid var(--color-primary-accent); background: var(--color-content-bg); }
+        .quiz-options input { margin-right: 10px; }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            background: var(--color-content-bg);
+            border-left: 4px solid var(--color-primary-accent);
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .horizontal-scroll-wrap {
+            overflow-x: auto;
+            padding-bottom: 24px;
+            scroll-snap-type: x mandatory;
+        }
+        .use-case-track {
+            display: inline-flex;
+            gap: 1.5rem;
+            min-width: min-content;
+            padding-right: 24px;
+        }
+        .use-case-card {
+            width: 310px;
+            padding: 24px;
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+        .use-case-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-border);
+            border-left: 4px solid var(--color-primary-accent);
+        }
+        .use-case-card h4 {
+            color: var(--color-secondary-accent);
+            font-size: 1.2rem;
+        }
+
+        .image-block {
+            margin: 2.25rem 0;
+            padding: 10px;
+            background: #fff;
+        }
+        .image-block img {
+            width: 100%;
+            max-height: 430px;
+            object-fit: contain;
+            background: var(--color-content-bg);
+        }
+        .image-block.narrow {
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .image-block.product {
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-rail {
+            position: fixed;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 80;
+            display: grid;
+            gap: 12px;
+        }
+        .section-rail a {
+            display: grid;
+            grid-template-columns: 42px 1fr;
+            align-items: center;
+            gap: 10px;
+            color: var(--color-meta-text);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        .section-rail .rail-num {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            line-height: 1;
+            color: var(--color-meta-text);
+            transition: color .2s;
+        }
+        .section-rail .rail-label {
+            max-width: 94px;
+            line-height: 1.1;
+            opacity: .75;
+        }
+        .section-rail a.active .rail-num,
+        .section-rail a.active .rail-label {
+            color: var(--color-primary-accent);
+            opacity: 1;
+        }
+
+        footer {
+            background: var(--color-secondary-accent);
+            color: #d8d8d8;
+            padding: 64px 0 28px;
+            font-size: 0.88rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        @media(min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+        .footer-col h4 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            letter-spacing: 1.6px;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+        .footer-brand .brand-title { color: #fff; }
+        .footer-col ul { list-style: none; padding: 0; margin: 0; }
+        .footer-col a {
+            color: #d8d8d8;
+            display: block;
+            padding: 4px 0;
+        }
+        .footer-col a:hover { color: #fff; }
+        .footer-disclosure {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            font-style: italic;
+        }
+.step-num {
+            display: inline-flex;
+            width: 34px;
+            height: 34px;
+            background: var(--color-primary-accent);
+            color: #fff;
+            border-radius: 0;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+
+        @media(max-width: 1180px) {
+            .section-rail { display: none; }
+        }
+        @media(max-width: 768px) {
+            body::before { display: none; }
+            body { font-size: 16px; }
+            header { height: 66px; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 66px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                padding: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+            .nav-links::after { display: none; }
+            .nav-links.active { display: flex; }
+            .nav-links a { padding: 10px 0; }
+            .hamburger { display: block; }
+            .brand-title { font-size: 1.22rem; white-space: normal; }
+            h1 { font-size: 48px; line-height: 0.9; }
+            h2 { font-size: 30px; letter-spacing: 3px; }
+            .hero {
+                background-image: none;
+                padding: 58px 0 46px;
+            }
+            .hero .container-read {
+                border-left-width: 2px;
+                padding-left: 22px;
+            }
+            section { padding: 70px 0; }
+            .perm-grid { grid-template-columns: 1fr; }
+            .method-title {
+                grid-template-columns: 58px 1fr;
+                column-gap: 16px;
+            }
+            .method-title::before { font-size: 52px; }
+            .saas-grid { gap: 2rem; }
+            .footer-grid { gap: 2rem; }
+        }
+
+    </style>
+</head>
+<body>
+<header>
+<div class="nav-inner">
+<a class="nav-logo" href="#top"><span aria-hidden="true" class="brand-mark">
+<svg focusable="false" role="img" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#000000" height="34" width="52" x="6" y="18"></rect>
+<path d="M14 18V14C14 10.7 16.7 8 20 8H31L37 14H50V18H14Z" fill="#E63329"></path>
+<rect fill="#FFFFFF" height="4" width="28" x="18" y="26"></rect>
+<rect fill="#FFFFFF" height="4" width="18" x="18" y="36"></rect>
+<path d="M48 32L54 36V45L48 49L42 45V36L48 32Z" fill="#E63329"></path>
+<rect fill="#FFFFFF" height="7" width="2" x="47" y="37"></rect>
+</svg>
+</span><span class="brand-title">Drive Protect Guide</span></a>
+<button aria-label="Toggle menu" class="hamburger" id="menuToggle">☰</button>
+<nav class="nav-links" id="mainNav">
+<a href="#methods">Methods</a>
+<a href="#comparison">Comparison</a>
+<a href="#recommendation">Our Pick</a>
+<a href="#tutorial">How-To</a>
+<a href="#faq">FAQ</a>
+<a class="btn btn-outline nav-cta" href="#buy">See Our Top Pick →</a>
+</nav>
+</div>
+</header>
+<aside aria-label="Section progress" class="section-rail">
+<a data-target-num="1" href="#overview"><span class="rail-num">00</span><span class="rail-label">Overview</span></a>
+<a data-target-num="2" href="#methods"><span class="rail-num">00</span><span class="rail-label">Methods</span></a>
+<a data-target-num="3" href="#comparison"><span class="rail-num">00</span><span class="rail-label">Compare</span></a>
+<a data-target-num="4" href="#tutorial"><span class="rail-num">00</span><span class="rail-label">How-To</span></a>
+<a data-target-num="5" href="#faq"><span class="rail-num">00</span><span class="rail-label">FAQ</span></a>
+</aside>
+
+<main>
+<!-- S1 — HERO (Editorial Mode) -->
+<section class="hero reveal" id="top">
+<div class="container-read">
+<span class="breadcrumb">Security Guides / Cloud Storage / Google Drive</span>
+<h1>Can You Lock a Folder in Google Drive — Complete Guide</h1>
+<p>Google Drive is excellent for collaboration, but its native security relies entirely on account permissions, not <a href="https://psbios.com/file-encryption-explained/" rel="noopener noreferrer" target="_blank">file encryption</a>. If you need to truly lock a folder to prevent unauthorized access, downloading, or viewing, you need to understand the difference between sharing restrictions and client-side encryption.</p>
+<div class="meta-bar">
+<span><strong>Editorial Team</strong></span>
+<span>·</span>
+<span>Updated Recently</span>
+<span>·</span>
+<span>12 min read</span>
+</div>
+<div class="quick-answer">
+<span class="label-pill">Quick Answer</span>
+<h3>Does Google Drive have a native password lock?</h3>
+<p><strong>No.</strong> You cannot natively lock a Google Drive folder with a password. Google Drive only allows you to restrict access by changing sharing permissions (removing users or setting them to "Viewer"). To truly password-protect files stored in Google Drive, you must use a <a href="https://proprivacy.com/guides/encrypt-files-windows" rel="noopener noreferrer" target="_blank">third-party encryption tool</a> to lock the folder <em>before</em> uploading it to the cloud.</p>
+</div><figure class="image-block reveal"><img alt="Encrypted cloud vault representing locked Google Drive folder security" loading="lazy" src="https://i.ibb.co/zhm6pwh4/The-Cloud-Vault.jpg"/></figure>
+</div>
+</section>
+<!-- S2 — TABLE OF CONTENTS -->
+<section class="bg-alt pt-0 reveal">
+<div class="container-read">
+<div class="toc-card reveal">
+<h3>In This Guide</h3>
+<ul class="toc-list">
+<li><a href="#overview">Google Drive Permission Model Explained</a></li>
+<li><a href="#methods">Method 1: Native Sharing Restrictions</a></li>
+<li><a href="#methods-zip">Method 2: Password-Protected ZIP Files</a></li>
+<li><a href="#recommendation">Method 3: Third-Party Encryption (Recommended)</a></li>
+<li><a href="#use-cases">Who Should Use Which Option</a></li>
+<li><a href="#core-features">Why Dedicated Encryption Matters</a></li>
+<li><a href="#comparison">Methods Comparison Table</a></li>
+<li><a href="#technical-deep-dive">Technical Deep Dive: How True Locking Works</a></li>
+<li><a href="#tutorial">Step-by-Step Tutorial</a></li>
+<li><a href="#troubleshooting">Troubleshooting &amp; Account Recovery</a></li>
+<li><a href="#faq">Frequently Asked Questions</a></li>
+</ul>
+</div>
+</div>
+</section>
+<!-- S3 — DIRECT ANSWER AND OVERVIEW -->
+<section class="reveal" id="overview">
+<div class="container-read">
+<h2>Permissions vs. Encryption — What Cloud Providers Don't Tell You</h2>
+<p>When searching for how to lock a folder in Google Drive, most users assume there is a simple "add password" button hidden in the settings. This is a misconception based on how operating systems like Windows and macOS handle local files.</p>
+<p>Google Workspace operates on a <strong>permission-based model</strong>. This means security is tied to Google Accounts. If someone gains access to your Google account (via a left-open browser session or compromised password), or if you accidentally generate a public "Anyone with the link" URL, there is no secondary password protecting the specific folders inside.</p>
+<div class="signature-quote">
+<svg viewbox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path></svg>
+                    "True file security in the cloud requires zero-knowledge encryption. If the cloud provider holds the keys to decrypt your data, it isn't truly locked."
+                </div><figure class="image-block reveal"><img alt="Secured cloud ecosystem with protected data access and encryption layers" loading="lazy" src="https://i.ibb.co/WvhfWD26/Secured-Cloud-Ecosystem.jpg"/></figure>
+<!-- Interactive Element 1: Permission Settings Explainer -->
+<div class="interactive-tool reveal">
+<div class="tool-header">
+<h3>Interactive: What Google Drive Roles Actually Mean</h3>
+<p>Hover over a permission level to see exactly what that user can do with your "locked" file.</p>
+</div>
+<div class="perm-grid">
+<div class="perm-card">
+<h4>Viewer</h4>
+<div class="perm-detail">Can read files, download them locally, and copy text. (Unless "Disable download/print" is checked).</div>
+</div>
+<div class="perm-card">
+<h4>Commenter</h4>
+<div class="perm-detail">Same as Viewer, plus can add suggestions and margin notes. Cannot alter the core file.</div>
+</div>
+<div class="perm-card">
+<h4>Editor</h4>
+<div class="perm-detail">Can modify files, delete them, and share them with entirely new people.</div>
+</div>
+</div>
+<p style="font-size: 0.85rem; color: var(--color-meta-text); margin-bottom: 0;"><strong>Note:</strong> None of these roles require a secondary password to open the file once access is granted.</p>
+</div>
+</div>
+</section>
+<!-- S4 — COMPLETE METHODS AND SOLUTIONS GUIDE -->
+<section class="bg-alt reveal" id="methods">
+<div class="container-read">
+<h2>How to Restrict Access to a Google Drive Folder</h2>
+<p>Since native passwords aren't an option, you have three primary approaches to secure your data. We evaluate each based on security level, ease of use, and practical limitations.</p><figure class="image-block reveal"><img alt="Locked drive technology showing restricted cloud folder access" loading="lazy" src="https://i.ibb.co/B5FrzdY8/Drive-Locked-Technology.jpg"/></figure>
+<h3 class="method-title" data-method="01">Method 1: Google Drive Sharing Restrictions</h3>
+<p>This is the built-in OS method. It does not encrypt the file, but it restricts who can look at it.</p>
+<ol>
+<li>Right-click the folder in Google Drive and select <strong>Share</strong>.</li>
+<li>Under "General access", ensure it is set to <strong>Restricted</strong> (not "Anyone with the link").</li>
+<li>Manually add the email addresses of approved viewers.</li>
+<li>Click the gear icon (Settings) and uncheck "Viewers and commenters can see the option to download, print, and copy" for added data protection.</li>
+</ol>
+<div class="meta-bar" style="border:none; background:#fff; padding:16px; border-radius:4px; margin-top:1rem;">
+<strong>Security:</strong> Low | <strong>Difficulty:</strong> Easy | <strong>Best for:</strong> Casual sharing.
+                </div><div aria-hidden="true" class="difficulty-meter"><span style="--fill:28%;"></span></div>
+<p><strong>Limitation:</strong> If someone leaves their laptop unlocked, anyone can open their browser and view your files. Google has the keys to your data.</p><figure class="image-block reveal"><img alt="Folder Lock share permissions screenshot for secure file access control" loading="lazy" src="https://i.ibb.co/1fDfv4Jj/folder-lock-10-screenshot-share-permissions.png"/></figure>
+<h3 class="method-title" data-method="02" id="methods-zip" style="margin-top:3rem;">Method 2: Password Protect Files Before Uploading (ZIP)</h3>
+<p>If you want to know how to <a href="https://kongotech.org/how-to-password-protect-a-zip-file/" rel="noopener noreferrer" target="_blank">password protect a folder</a> in Google Drive for free, compressing it into a ZIP file with a password before uploading is the oldest manual approach.</p>
+<ol>
+<li>On Windows, use a tool like 7-Zip. Right-click the folder &gt; 7-Zip &gt; Add to archive.</li>
+<li>Under the "Encryption" section, enter a strong password.</li>
+<li>Upload the resulting <code>.zip</code> file to Google Drive.</li>
+</ol>
+<div class="meta-bar" style="border:none; background:#fff; padding:16px; border-radius:4px; margin-top:1rem;">
+<strong>Security:</strong> Moderate | <strong>Difficulty:</strong> Tedious | <strong>Best for:</strong> Archiving old files.
+                </div><div aria-hidden="true" class="difficulty-meter"><span style="--fill:58%;"></span></div>
+<p><strong>Limitation:</strong> You cannot edit files inside a ZIP on Google Drive. You must download the ZIP, extract it, edit the file locally, re-zip it with a password, and re-upload it. This breaks cloud collaboration entirely.</p><figure class="image-block reveal"><img alt="Encrypted folders interface illustrating password protected files before cloud upload" loading="lazy" src="https://i.ibb.co/T9K6tn6/encrypt-folders.png"/></figure>
+</div>
+</section>
+<!-- S5 — WHY RECOMMEND (PREMIUM SAAS MOMENT) -->
+<section class="saas-band reveal" id="recommendation">
+<div class="container-wide saas-grid">
+<div>
+<span class="label-pill">Editorial Pick</span>
+<h2>The Tool We Recommend for Most Users</h2>
+<p>Of all the options we covered, Native sharing is too weak for sensitive data, and manual ZIP archiving destroys the convenience of cloud storage.</p>
+<p>If you are handling financial documents, legal files, or sensitive client data, you need <a href="https://nira.com/best-encryption-software/" rel="noopener noreferrer" target="_blank">client-side encryption</a>. We recommend <strong><a href="https://cloudstorageinfo.org/folder-lock-review" rel="noopener noreferrer" target="_blank">Folder Lock</a></strong>. It scrambles your files locally on your PC, Mac, or smartphone <em>before</em> they sync to Google Drive, ensuring zero-knowledge privacy while keeping your workflow intact.</p>
+<div class="saas-chips">
+<span class="chip">AES-256 Encryption</span>
+<span class="chip">Auto-Cloud Sync</span>
+<span class="chip">Multi-Device Support</span>
+</div><div aria-hidden="true" class="difficulty-meter"><span style="--fill:76%;"></span></div>
+<div class="saas-actions">
+<a class="btn btn-filled" href="http://www.newsoftwares.net/download/folderlock7-en/folder-lock.exe" rel="noopener noreferrer" target="_blank">Try Folder Lock Free →</a>
+<a class="btn btn-white" href="https://store.newsoftwares.net/?add=fl10" rel="noopener noreferrer" target="_blank">Get the Full Version →</a>
+</div>
+</div>
+<div class="saas-mockup">
+<div class="saas-mockup-header">
+<div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+</div>
+<div class="mockup-content"><img alt="Folder Lock 10 main dashboard for local encryption before Google Drive sync" loading="lazy" src="https://i.ibb.co/ynCZTHt1/folder-lock-10-main-screen.png"/></div>
+</div>
+</div>
+</section>
+<!-- S6 — USE CASE SELECTOR (Seed A: Horizontal Scroll) -->
+<section class="reveal" id="use-cases">
+<div class="container-wide">
+<h2>Who Needs Client-Side Encryption?</h2>
+<p>Standard Google Drive security is fine for grocery lists. You need true folder locking for these scenarios:</p><figure class="image-block reveal"><img alt="Shielded workspace for remote workers protecting business files" loading="lazy" src="https://i.ibb.co/sv39r4G5/The-Shielded-Workspace.jpg"/></figure>
+<div class="horizontal-scroll-wrap">
+<div class="use-case-track">
+<div class="use-case-card reveal">
+<h4>Remote Workers</h4>
+<p>Protecting company IP on personal devices. If your laptop is stolen or accessed by family members, the local Google Drive sync folder remains locked.</p>
+</div>
+<div class="use-case-card reveal">
+<h4>HR &amp; Management</h4>
+<p>Storing employee records, payroll data, and performance reviews in a shared corporate Drive where IT admins might otherwise have master access.</p>
+</div>
+<div class="use-case-card reveal">
+<h4>Freelancers</h4>
+<p>Managing multiple client portfolios. Ensures Client A cannot accidentally be given access to Client B's folder through a mistaken link share.</p>
+</div>
+<div class="use-case-card reveal">
+<h4>Healthcare Providers</h4>
+<p>Meeting compliance requirements (like HIPAA) by ensuring Patient Health Information (PHI) is encrypted at rest before hitting cloud servers.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- S7 — CORE FEATURES (V1: Icon Left) -->
+<section class="bg-alt reveal" id="core-features">
+<div class="container-read">
+<h2>What a Dedicated Folder Lock Provides</h2>
+<p>When you bypass native Drive limitations with a dedicated client-side tool, your security posture changes completely. A robust vault goes beyond simply obscuring folder names.</p><figure class="image-block reveal"><img alt="Secure virtual drive showing client-side encrypted file vault protection" loading="lazy" src="https://i.ibb.co/q3LHT6Kb/Secure-Virtual-Drive.jpg"/></figure>
+<div class="feature-row reveal">
+<div class="feature-icon">
+<svg viewbox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"></path></svg>
+</div>
+<div class="feature-content">
+<h4>Zero-Knowledge Cloud Protection</h4>
+<p>Files are scrambled into an unreadable state locally on your machine. Google’s servers only receive the encrypted vault file. Even in the event of a massive cloud server breach, your raw data never touches the internet.</p>
+</div>
+</div>
+<div class="feature-row reveal">
+<div class="feature-icon">
+<svg viewbox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"></path></svg>
+</div>
+<div class="feature-content">
+<h4>Cross-Platform Accessibility</h4>
+<p>Unlike native OS locks (which bind files to a single Mac or PC), a specialized locker file synchronizes across Windows, macOS, Android, and iOS. You can secure a financial report on your desktop and securely decrypt it to view on your iPhone later.</p>
+</div>
+</div>
+<div class="feature-row reveal">
+<div class="feature-icon">
+<svg viewbox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path></svg>
+</div>
+<div class="feature-content">
+<h4>Comprehensive Digital Vaults</h4>
+<p>A true locker secures more than just file folders. It offers dedicated modules to house credit card details, banking credentials, and private notes. This data lives in the same AES-secured vault that houses your documents.</p>
+</div>
+</div>
+<div class="feature-row reveal">
+<div class="feature-icon">
+<svg viewbox="0 0 24 24"><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2H8.9V6zM18 20H6V10h12v10z"></path></svg>
+</div>
+<div class="feature-content">
+<h4>Hack Attempt Monitoring</h4>
+<p>If someone physically accesses your phone or laptop and attempts to guess your master password, modern locking suites log the date and time of the incorrect attempt. On mobile apps, it will even silently capture a photo of the intruder.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- S8 — METHODS COMPARISON (V4: Dot Matrix) -->
+<section class="reveal" id="comparison">
+<div class="container-wide">
+<h2>Methods Comparison</h2><figure class="image-block reveal"><img alt="Secure syncing of encrypted files across OneDrive Dropbox iCloud and Google Drive" loading="lazy" src="https://i.ibb.co/xqgxb3Pj/syncing-files-securely-onedrive-dropbox-icloud-and-google-drive.jpg"/></figure>
+<div class="table-responsive">
+<table class="compare-table">
+<thead>
+<tr>
+<th>Security Approach</th>
+<th>Prevents Viewing</th>
+<th>Prevents Deletion</th>
+<th>Zero-Knowledge</th>
+<th>Editable in Cloud</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Native Drive Permissions</td>
+<td><span class="dot filled"></span></td>
+<td><span class="dot empty"></span></td>
+<td><span class="dot empty"></span></td>
+<td><span class="dot filled"></span></td>
+</tr>
+<tr>
+<td>Password ZIP File</td>
+<td><span class="dot filled"></span></td>
+<td><span class="dot empty"></span></td>
+<td><span class="dot filled"></span></td>
+<td><span class="dot empty"></span></td>
+</tr>
+<tr class="compare-row-highlight">
+<td>Folder Lock (Client-side)</td>
+<td><span class="dot filled"></span></td>
+<td><span class="dot filled"></span></td>
+<td><span class="dot filled"></span></td>
+<td><span class="dot filled"></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="text-align:center; font-size: 0.9rem; color: var(--color-meta-text);">
+<span class="dot filled" style="vertical-align: middle; margin-right: 4px;"></span> = Yes/Supported   
+                    <span class="dot empty" style="vertical-align: middle; margin-right: 4px;"></span> = No/Unsupported
+                </p>
+</div>
+</section>
+<!-- S10 — PRODUCT DEEP-DIVE ACCORDION -->
+<section class="bg-alt reveal" id="technical-deep-dive">
+<div class="container-read">
+<h2>Technical Deep Dive: How True Locking Works</h2>
+<p>Understanding the underlying architecture of a dedicated encryption tool explains why it supersedes basic file-hiding tricks.</p><figure class="image-block reveal"><img alt="Virtual drive feature showing protected files inside an encrypted locker" loading="lazy" src="https://i.ibb.co/gZrxkVx6/Virtual-Drive-Feature.jpg"/></figure>
+<div class="faq-accordion">
+<div class="accordion-item reveal">
+<button aria-expanded="false" class="accordion-header">On-the-Fly Encryption Processing</button>
+<div class="accordion-content">
+<div class="accordion-inner">
+                                Older software required you to decrypt a file, save it to your hard drive, edit it, and manually re-encrypt it. This left temporary, unencrypted shadow files on your hard drive that recovery software could scrape. Modern tools utilize on-the-fly encryption: files are decrypted entirely inside your computer's RAM. Because data is never written back to the physical disk in a vulnerable state, there are zero footprints left behind for forensic recovery tools to find.
+                            </div>
+</div>
+</div>
+<div class="accordion-item reveal">
+<button aria-expanded="false" class="accordion-header">The "No Backdoor" Guarantee</button>
+<div class="accordion-content">
+<div class="accordion-inner">
+                                True privacy requires that the developer themselves cannot see your files. Reputable locking software does not transmit your master password to their corporate servers, nor do they hold a "master skeleton key." If a legal entity demands access to your encrypted Google Drive vault, the software provider cannot assist them because the mathematical keys exist only inside your head.
+                            </div>
+</div>
+</div>
+<div class="accordion-item reveal">
+<button aria-expanded="false" class="accordion-header">Kernel-Level OS Integration</button>
+<div class="accordion-content">
+<div class="accordion-inner">
+                                Weak file hiders simply change the "visible" attribute of a folder. If a malicious user boots your machine into Safe Mode (bypassing standard startup programs), those "hidden" folders instantly become visible. Advanced locking suites utilize kernel-level filter drivers. This embeds the security deep within the operating system core, ensuring that restricted files remain completely invisible and inaccessible regardless of how the machine is booted.
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- INTERACTIVE ELEMENT 2: Risk Calculator -->
+<section class="reveal">
+<div class="container-read">
+<div class="interactive-tool reveal" id="riskCalc">
+<div class="tool-header">
+<h3>File Sharing Risk Calculator</h3>
+<p>Answer three questions to see if native Google Drive permissions are enough for your data.</p>
+</div>
+<div class="quiz-question">
+<strong>1. What type of data are you storing?</strong>
+<div class="quiz-options">
+<label><input name="q1" type="radio" value="0"/> Personal photos or notes</label>
+<label><input name="q1" type="radio" value="1"/> Business operations / Marketing assets</label>
+<label><input name="q1" type="radio" value="3"/> Financial records, passwords, or legal documents</label>
+</div>
+</div>
+<div class="quiz-question">
+<strong>2. Who are you sharing this folder with?</strong>
+<div class="quiz-options">
+<label><input name="q2" type="radio" value="0"/> Just myself</label>
+<label><input name="q2" type="radio" value="1"/> A small, trusted internal team</label>
+<label><input name="q2" type="radio" value="2"/> External clients or third-party vendors</label>
+</div>
+</div>
+<div class="quiz-question">
+<strong>3. Are your devices shared or ever left unattended?</strong>
+<div class="quiz-options">
+<label><input name="q3" type="radio" value="0"/> No, strict physical security</label>
+<label><input name="q3" type="radio" value="2"/> Yes, occasionally</label>
+</div>
+</div>
+<button class="btn btn-outline" onclick="calculateRisk()" style="margin-top: 1rem;">Analyze Risk Level</button>
+<div class="quiz-result" id="quizResult"></div>
+</div>
+</div>
+</section>
+<!-- S9 — TUTORIAL -->
+<section class="bg-alt reveal" id="tutorial">
+<div class="container-read">
+<h2>How to Password Protect Files Before Uploading to Google Drive</h2>
+<p>If you have decided that true encryption is necessary, here is how you build a secure vault using Folder Lock that syncs flawlessly to the cloud across your devices.</p><figure class="image-block reveal"><img alt="Folder Lock protect folders screen used before uploading files to Google Drive" loading="lazy" src="https://i.ibb.co/czvrxyF/folder-lock-10-protect-folders-screen.png"/></figure>
+<div style="margin-bottom: 2rem;">
+<h3><span class="step-num">1</span> Construct a Secure Vault</h3>
+<p>Open the desktop or mobile application and generate a new encrypted locker. This digital vault requires a master password of your choosing. Ensure it is robust, as this key will be necessary to open the vault on any machine.</p>
+</div>
+<div style="margin-bottom: 2rem;">
+<h3><span class="step-num">2</span> Designate the Cloud Path</h3>
+<p>During the vault creation process, point the save destination directly to your local <code>Google Drive</code> synchronization folder on your PC, or select the dedicated Google Drive option within the mobile interface.</p>
+</div>
+<div style="margin-bottom: 2rem;">
+<h3><span class="step-num">3</span> Deposit Sensitive Assets</h3>
+<p>With the locker open, transfer your confidential spreadsheets, videos, or legal PDFs inside. Once you select the "close" or "encrypt" command, the software immediately scrambles the contents into a solitary, impenetrable data block.</p>
+</div>
+<div style="margin-bottom: 2rem;">
+<h3><span class="step-num">4</span> Multi-Device Synchronization</h3>
+<p>Google Drive will detect this newly encrypted block and push it to the cloud. You can now open the companion app on your Mac, iPhone, or Android tablet, tap the Google Drive sync option, input your master password, and seamlessly decrypt the contents on the go.</p>
+</div>
+<p class="text-center mt-4">
+<a class="btn btn-outline" href="http://www.newsoftwares.net/download/folderlock7-en/folder-lock.exe" rel="noopener noreferrer" target="_blank">Download the free version to try this →</a>
+</p>
+</div>
+</section>
+<!-- S16 — TROUBLESHOOTING & RECOVERY -->
+<section class="reveal" id="troubleshooting">
+<div class="container-read">
+<h2>Troubleshooting &amp; Account Recovery</h2>
+<p>Losing access to locked cloud files is stressful. Here is how to handle the most common recovery scenarios safely and legitimately.</p><figure class="image-block reveal"><img alt="Unlocking encrypted data for safe recovery and authorized access" loading="lazy" src="https://i.ibb.co/gLVNxgq4/Accessing-Data-Unlocking.jpg"/></figure>
+<h3>How to revoke access to a shared cloud folder</h3>
+<p>If you accidentally shared a Google Drive link, immediately go to the folder, click <strong>Share</strong>, find the user (or the general link setting), and change their status to <strong>Remove access</strong>. The change is instant; their browser will display an error if they try to reload the file.</p>
+<h3>Forgot your Folder Lock password? Here is how to recover access</h3>
+<p>True zero-knowledge encryption guarantees there are no backdoors—even the developers cannot bypass the lock. If you lose the master password to an encrypted vault synced to Drive, there is no "forgot password" email reset that will magically unlock your files. The mathematical key needed to decrypt the data is irretrievably lost. Your only recourse is checking your records for the emergency recovery key you may have generated during initial setup, or relying on an unencrypted local backup if you maintained one.</p>
+<h3>Google Drive Download Blocked</h3>
+<p>If you cannot download a file from Drive, the owner likely checked the "Disable download, print, and copy" restriction. You must contact the file owner directly to request that they change the folder security settings.</p>
+</div>
+</section>
+<!-- S12/S13 — PRICING (V6: Two Column Table) -->
+<section class="bg-alt reveal" id="pricing">
+<div class="container-read">
+<h2>Folder Lock Pricing: What You Get</h2>
+<p>While basic sharing limits in Google Drive are free, adding real client-side encryption requires <a href="https://thectoclub.com/tools/best-encryption-software/" rel="noopener noreferrer" target="_blank">dedicated software</a>. Here is the editorial breakdown of the costs.</p>
+<div class="pricing-grid">
+<div class="price-col reveal">
+<h3>Free Version</h3>
+<ul class="price-list">
+<li>Basic folder hiding and locking</li>
+<li>1 GB maximum locker size limit</li>
+<li>Sync capability limited to 2 devices</li>
+<li>Local encryption testing</li>
+</ul>
+<p style="font-style: italic; font-size: 0.85rem; margin-top:1rem;">Best for testing the workflow and protecting a small batch of personal files before committing.</p>
+<a class="btn btn-outline" href="http://www.newsoftwares.net/download/folderlock7-en/folder-lock.exe" rel="noopener noreferrer" style="margin-top:auto" target="_blank">Download Free Version →</a>
+</div>
+<div class="price-col price-col-highlight reveal">
+<h3>Pro Version</h3>
+<ul class="price-list">
+<li>Unlimited locker size capacity</li>
+<li>Sync encrypted vaults across up to 5 devices</li>
+<li>Advanced file shredding tools</li>
+<li>Secure sharing functionality for authorized users</li>
+<li>One-time $39.95 purchase (no subscriptions)</li>
+</ul>
+<p style="font-style: italic; font-size: 0.85rem; margin-top:1rem;">The standard for remote workers, freelancers, and businesses securing large archives.</p>
+<a class="btn btn-filled" href="https://store.newsoftwares.net/?add=fl10" rel="noopener noreferrer" style="margin-top:auto" target="_blank">View Full Pricing →</a>
+</div>
+</div><figure class="image-block reveal product"><img alt="Folder Lock 10 Pro software boxshot for secure folder encryption" loading="lazy" src="https://i.ibb.co/Psv235rk/folder-lock-10-pro-boxshot-160x220.png"/></figure>
+</div>
+</section>
+<!-- S17 — TESTIMONIALS (V6) -->
+<section class="reveal">
+<div class="container-read">
+<div class="inline-testimonial reveal">
+<p>"We use Google Workspace for everything, but our HR files needed actual lock-and-key security. Client-side encryption solved the problem without forcing us to leave the Google ecosystem. It works so well that even Microsoft couldn't crack it."</p>
+<span class="author">Operations Director · Financial Services Firm</span>
+</div>
+</div>
+</section>
+<!-- S20 — FAQ (V4: Accordion) -->
+<section class="bg-alt reveal" id="faq">
+<div class="container-read">
+<h2>Frequently Asked Questions</h2>
+<div class="faq-accordion">
+<div class="accordion-item reveal">
+<button aria-expanded="false" class="accordion-header">Can you really lock a folder in Google Drive?</button>
+<div class="accordion-content">
+<div class="accordion-inner">
+                                Not natively with a password. Google Drive allows you to restrict access by user account, but it does not offer a PIN or password lock for specific folders. You must use third-party client-side encryption to achieve this.
+                            </div>
+</div>
+</div>
+<div class="accordion-item reveal">
+<button aria-expanded="false" class="accordion-header">What is the difference between restricting sharing and locking in Google Drive?</button>
+<div class="accordion-content">
+<div class="accordion-inner">
+                                Restricting sharing simply tells Google's servers not to show the file to certain logged-in accounts. Locking (encryption) mathematically scrambles the file itself, meaning even if Google's servers fail or someone intercepts the file, it remains unreadable without the password.
+                            </div>
+</div>
+</div>
+<div class="accordion-item reveal">
+<button aria-expanded="false" class="accordion-header">Can cloud service employees access my files?</button>
+<div class="accordion-content">
+<div class="accordion-inner">
+                                Standard files uploaded to Google Drive are encrypted "at rest" on Google's servers, but Google holds the decryption keys. In rare cases (legal requests, automated TOS scanning), the provider can access the data. Zero-knowledge client-side encryption prevents this entirely.
+                            </div>
+</div>
+</div>
+<div class="accordion-item reveal">
+<button aria-expanded="false" class="accordion-header">Can I lock a file in Google Drive from editing?</button>
+<div class="accordion-content">
+<div class="accordion-inner">
+                                Yes. Share the file and set the recipient's permission level to "Viewer" or "Commenter". They will be able to read the file but cannot make changes to the original document.
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- S19 — RELATED PRODUCTS -->
+<section class="reveal">
+<div class="container-read">
+<h2>Other Security Tools from the Same Developer</h2>
+<p>These tools are developed by NewSoftwares.net, the same team behind Folder Lock, offering specialized security for different mediums.</p>
+<div class="pricing-grid">
+<div class="price-col reveal" style="padding: 1.5rem;">
+<figure class="image-block reveal product"><img alt="Cloud Secure boxshot for protecting local cloud synchronization folders" loading="lazy" src="https://i.ibb.co/PBv0CDc/cloud-secure-boxshot.png"/></figure><h3 style="font-size: 1.2rem;"><a href="https://www.24-7pressrelease.com/press-release/435143/newsoftwaresnet-releases-a-cloud-secure-password-protection-for-all-cloud-platforms" rel="noopener noreferrer" target="_blank">Cloud Secure</a></h3>
+<p style="font-size: 0.9rem;">Designed exclusively for users who want to lock down the entire local sync directory for cloud providers (Dropbox, Drive, OneDrive) on their PC with a single click, without manually creating individual encrypted vaults.</p>
+<a href="https://www.newsoftwares.net" rel="noopener noreferrer" style="font-size: 0.9rem; margin-top: auto;" target="_blank">Learn more →</a>
+</div>
+<div class="price-col reveal" style="padding: 1.5rem;">
+<figure class="image-block reveal product"><img alt="USB Secure product box and screenshot for password protecting external drives" loading="lazy" src="https://i.ibb.co/dJX03kDG/usb-secure-product-box-screenshot.jpg"/></figure><h3 style="font-size: 1.2rem;"><a href="https://mspoweruser.com/secure-your-data-top-usb-password-protection-tools/" rel="noopener noreferrer" target="_blank">USB Secure</a></h3>
+<p style="font-size: 0.9rem;">A standalone, portable application meant to live directly on your USB flash drives. It requires no installation on the host computer, ensuring your external media remains password-protected wherever you plug it in.</p>
+<a href="https://www.newsoftwares.net" rel="noopener noreferrer" style="font-size: 0.9rem; margin-top: auto;" target="_blank">Learn more →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- S22 — FINAL VERDICT -->
+<section class="bg-alt reveal" id="verdict">
+<div class="container-read text-center" style="text-align: center;">
+<h2>Our Verdict</h2>
+<p style="max-width: 600px; margin: 0 auto 2rem;">If you just want to stop a coworker from accidentally deleting a shared spreadsheet, Google Drive's native permission restrictions are sufficient. But if you are storing tax documents, client data, or business IP in the cloud, you need true zero-knowledge security.</p>
+<p style="max-width: 600px; margin: 0 auto 3rem;">We recommend encrypting files locally before they ever reach the cloud. It is the only way to guarantee absolute privacy.</p>
+<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+<a class="btn btn-outline" href="http://www.newsoftwares.net/download/folderlock7-en/folder-lock.exe" rel="noopener noreferrer" target="_blank">Try Folder Lock Free →</a>
+<a class="btn btn-filled" href="https://store.newsoftwares.net/?add=fl10" rel="noopener noreferrer" target="_blank">Get the Full Version →</a>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container-wide">
+<div class="footer-grid">
+<div class="footer-col">
+<div class="footer-brand"><span aria-hidden="true" class="brand-mark">
+<svg focusable="false" role="img" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#000000" height="34" width="52" x="6" y="18"></rect>
+<path d="M14 18V14C14 10.7 16.7 8 20 8H31L37 14H50V18H14Z" fill="#E63329"></path>
+<rect fill="#FFFFFF" height="4" width="28" x="18" y="26"></rect>
+<rect fill="#FFFFFF" height="4" width="18" x="18" y="36"></rect>
+<path d="M48 32L54 36V45L48 49L42 45V36L48 32Z" fill="#E63329"></path>
+<rect fill="#FFFFFF" height="7" width="2" x="47" y="37"></rect>
+</svg>
+</span><span class="brand-title">Drive Protect Guide</span></div>
+<p>The complete guide to securing and locking Google Drive folders. Independent security analysis and tutorials for remote workers and businesses.</p>
+<p style="margin-top: 1rem;">Folder Lock is developed by <a href="https://www.newsoftwares.net" rel="noopener noreferrer" style="display:inline; color:var(--color-primary-accent);" target="_blank">NewSoftwares.net</a>.</p>
+</div>
+<div class="footer-col">
+<h4>Navigation</h4>
+<ul>
+<li><a href="#methods">Methods Overview</a></li>
+<li><a href="#comparison">Security Comparison</a></li>
+<li><a href="#tutorial">How-To Tutorial</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Legal</h4>
+<ul>
+<li><a href="#privacy">Privacy Policy</a></li>
+<li><a href="#terms">Terms of Use</a></li>
+<li><a href="#editorial">Editorial Policy</a></li>
+<li><a href="#contact">Contact Support</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-disclosure">
+                This site operates as an independent editorial resource. Some links may earn a referral commission at no cost to you. Product recommendations reflect editorial judgment and independent assessment. <br/>
+                © 2026 DriveProtectGuide
+            </div>
+</div>
+</footer>
+<!-- JS & Schema -->
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "DriveProtectGuide",
+          "description": "The complete guide to securing and locking Google Drive folders.",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "name": "Can You Lock a Folder in Google Drive — Complete Guide"
+        },
+        {
+          "@type": "Article",
+          "headline": "Can You Lock a Folder in Google Drive — Complete Guide",
+          "author": { "@type": "Organization", "name": "DriveProtectGuide Editorial Team" },
+          "publisher": { "@type": "Organization", "name": "NewSoftwares.net" }
+        },
+        {
+          "@type": "Organization",
+          "name": "NewSoftwares.net",
+          "description": "Developer of security and privacy software."
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Folder Lock",
+          "applicationCategory": "SecurityApplication",
+          "operatingSystem": "Windows, macOS, iOS, Android",
+          "offers": { "@type": "Offer", "price": "39.95", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "Product",
+          "name": "Folder Lock",
+          "brand": { "@type": "Organization", "name": "NewSoftwares.net" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Security Guides" },
+            { "@type": "ListItem", "position": 2, "name": "Cloud Storage" },
+            { "@type": "ListItem", "position": 3, "name": "Google Drive" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Can you really lock a folder in Google Drive?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not natively with a password. Google Drive allows you to restrict access by user account, but it does not offer a PIN or password lock for specific folders. You must use third-party client-side encryption to achieve this."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the difference between restricting sharing and locking in Google Drive?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Restricting sharing simply tells Google's servers not to show the file to certain logged-in accounts. Locking (encryption) mathematically scrambles the file itself, meaning even if Google's servers fail or someone intercepts the file, it remains unreadable without the password."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "name": "How to Password Protect Files Before Uploading to Google Drive",
+          "step": [
+            { "@type": "HowToStep", "name": "Construct a Secure Vault", "text": "Open the desktop or mobile application and generate a new encrypted locker." },
+            { "@type": "HowToStep", "name": "Designate the Cloud Path", "text": "Point the save destination directly to your local Google Drive synchronization folder." },
+            { "@type": "HowToStep", "name": "Deposit Sensitive Assets", "text": "Transfer your confidential spreadsheets, videos, or legal PDFs inside the locker." },
+            { "@type": "HowToStep", "name": "Multi-Device Synchronization", "text": "Google Drive will detect this newly encrypted block and push it to the cloud. You can decrypt it later via companion apps." }
+          ]
+        }
+      ]
+    }
+    </script>
+<script defer="">
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                header.style.boxShadow = window.scrollY > 50 ? '0 2px 0 rgba(0,0,0,0.08)' : 'none';
+            });
+
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                    menuToggle.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+                });
+            }
+
+            const navLinks = Array.from(document.querySelectorAll('#mainNav a[href^="#"]'));
+            const railLinks = Array.from(document.querySelectorAll('.section-rail a'));
+            const setNavIndicator = (activeLink) => {
+                if (!activeLink || !mainNav) return;
+                const navRect = mainNav.getBoundingClientRect();
+                const linkRect = activeLink.getBoundingClientRect();
+                mainNav.style.setProperty('--nav-left', `${linkRect.left - navRect.left}px`);
+                mainNav.style.setProperty('--nav-width', `${linkRect.width}px`);
+            };
+
+            const setActive = (id) => {
+                navLinks.forEach(link => {
+                    const isActive = link.getAttribute('href') === `#${id}`;
+                    link.classList.toggle('active', isActive);
+                    if (isActive) setNavIndicator(link);
+                });
+                railLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                });
+            };
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (!targetId || targetId.length <= 1) return;
+                    const target = document.querySelector(targetId);
+                    if (!target) return;
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if (window.innerWidth <= 768 && mainNav && menuToggle) {
+                        mainNav.classList.remove('active');
+                        menuToggle.textContent = '☰';
+                    }
+                });
+            });
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        if (entry.target.classList.contains('difficulty-meter')) {
+                            entry.target.classList.add('in-view');
+                        }
+                    }
+                });
+            }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+            document.querySelectorAll('.reveal, .difficulty-meter').forEach(el => revealObserver.observe(el));
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) setActive(entry.target.id);
+                });
+            }, { threshold: 0.35, rootMargin: '-18% 0px -55% 0px' });
+            ['overview','methods','comparison','tutorial','faq'].forEach(id => {
+                const section = document.getElementById(id);
+                if (section) sectionObserver.observe(section);
+            });
+            setTimeout(() => {
+                const current = navLinks.find(link => link.classList.contains('active')) || navLinks[0];
+                setNavIndicator(current);
+            }, 50);
+            window.addEventListener('resize', () => {
+                const current = navLinks.find(link => link.classList.contains('active')) || navLinks[0];
+                setNavIndicator(current);
+            });
+
+            railLinks.forEach(link => {
+                const target = parseInt(link.dataset.targetNum || '0', 10);
+                const number = link.querySelector('.rail-num');
+                let current = 0;
+                const step = () => {
+                    current += 1;
+                    if (number) number.textContent = String(current).padStart(2, '0');
+                    if (current < target) requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
+            });
+
+            const compareTable = document.querySelector('.compare-table');
+            if (compareTable) {
+                const cells = compareTable.querySelectorAll('th, td');
+                cells.forEach(cell => {
+                    cell.addEventListener('mouseenter', () => {
+                        const index = cell.cellIndex + 1;
+                        compareTable.querySelectorAll('tr').forEach(row => {
+                            const targetCell = row.children[index - 1];
+                            if (targetCell) targetCell.classList.add('col-highlight');
+                        });
+                    });
+                    cell.addEventListener('mouseleave', () => {
+                        compareTable.querySelectorAll('.col-highlight').forEach(el => el.classList.remove('col-highlight'));
+                    });
+                });
+            }
+
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const expanded = btn.getAttribute('aria-expanded') === 'true';
+                    const parentGroup = btn.closest('.faq-accordion');
+                    if(parentGroup) {
+                        parentGroup.querySelectorAll('.accordion-header').forEach(otherBtn => {
+                            otherBtn.setAttribute('aria-expanded', 'false');
+                            otherBtn.nextElementSibling.style.maxHeight = null;
+                        });
+                    }
+                    if (!expanded) {
+                        btn.setAttribute('aria-expanded', 'true');
+                        const answer = btn.nextElementSibling;
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    }
+                });
+            });
+
+            window.calculateRisk = function() {
+                const q1 = document.querySelector('input[name="q1"]:checked');
+                const q2 = document.querySelector('input[name="q2"]:checked');
+                const q3 = document.querySelector('input[name="q3"]:checked');
+                const resultDiv = document.getElementById('quizResult');
+
+                if (!q1 || !q2 || !q3) {
+                    resultDiv.style.display = 'block';
+                    resultDiv.innerHTML = "Please answer all three questions to calculate your risk.";
+                    resultDiv.style.borderLeftColor = '#EEEEEE';
+                    return;
+                }
+
+                const score = parseInt(q1.value) + parseInt(q2.value) + parseInt(q3.value);
+                let resultHTML = "";
+                let borderColor = "";
+
+                if (score <= 1) {
+                    resultHTML = "<strong>Low Risk:</strong> Native Google Drive permissions are likely sufficient for your needs. Keep sharing set to 'Restricted'.";
+                    borderColor = "#111111";
+                } else if (score <= 4) {
+                    resultHTML = "<strong>Moderate Risk:</strong> You are handling sensitive data. Ensure you remove 'Download/Print' permissions for viewers, or consider client-side encryption for ultimate peace of mind.";
+                    borderColor = "#E63329";
+                } else {
+                    resultHTML = "<strong>High Risk:</strong> Your workflow exposes highly sensitive data to cloud vulnerabilities. You must use true client-side encryption (like Folder Lock) before uploading files to Google Drive.";
+                    borderColor = "#E63329";
+                }
+
+                resultDiv.innerHTML = resultHTML;
+                resultDiv.style.borderLeftColor = borderColor;
+                resultDiv.style.display = 'block';
+            };
+        });
+    </script>
+</body>
+</html>
