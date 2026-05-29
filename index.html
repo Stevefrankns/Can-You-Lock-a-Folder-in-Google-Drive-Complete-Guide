@@ -960,6 +960,80 @@
             .footer-grid { gap: 2rem; }
         }
 
+    
+
+        /* === Visibility + contrast fixes added by ChatGPT ===
+           Reason: the original .reveal animation used clip-path: inset(100%)
+           which can hide text until JavaScript/IntersectionObserver fires.
+           Some dark-section links and the first table heading cell also had
+           low/zero contrast because global link/table rules overrode them. */
+
+        .reveal,
+        .reveal.in-view {
+            clip-path: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+            transition: border-color .25s ease, border-left-color .25s ease, background .25s ease, color .25s ease, opacity .25s ease !important;
+        }
+
+        .difficulty-meter span {
+            width: var(--fill, 0%) !important;
+        }
+
+        .saas-band a:not(.btn),
+        .saas-band a:not(.btn):visited {
+            color: #FFFFFF !important;
+            font-weight: 700;
+            text-decoration-color: var(--color-primary-accent);
+        }
+
+        .saas-band a:not(.btn):hover {
+            color: var(--color-primary-accent) !important;
+        }
+
+        .saas-band .btn-white,
+        .saas-band .btn-outline {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border-color: #FFFFFF !important;
+        }
+
+        .saas-band .btn-white:hover,
+        .saas-band .btn-outline:hover {
+            background: var(--color-primary-accent) !important;
+            color: #FFFFFF !important;
+            border-color: var(--color-primary-accent) !important;
+        }
+
+        .compare-table th:first-child {
+            background: var(--color-secondary-accent) !important;
+            color: #FFFFFF !important;
+        }
+
+        .compare-table td:first-child {
+            color: var(--color-secondary-accent) !important;
+        }
+
+        .footer-col a,
+        footer a,
+        footer a:visited {
+            color: #F2F2F2;
+        }
+
+        .footer-col a:hover,
+        footer a:hover {
+            color: #FFFFFF;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
     </style>
 </head>
 <body>
