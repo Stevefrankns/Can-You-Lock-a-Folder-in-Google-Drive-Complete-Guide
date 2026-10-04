@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://can-you-lock-a-folder-in-google-drive.vercel.app/sitemap.xml
